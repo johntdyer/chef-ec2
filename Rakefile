@@ -5,7 +5,7 @@ task :host do |t|
 end
 
 task :sync => :host do |t|
-  sh "rsync -Cavz . #{ENV['SERVER']}:/etc/chef"
+  sh "rsync -Cavz --delete . #{ENV['SERVER']}:/etc/chef"
 end
 
 task :bootstrap => [:sync, :host] do |t|
