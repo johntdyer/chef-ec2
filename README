@@ -14,8 +14,8 @@ which will be something like 'ec2-174-129-96-38.compute-1.amazonaws.com'.
 2. Bootstrap chef:
    $ rake bootstrap SERVER=$SERVER
 
-3. Edit your cookbook and dna.
-   The dna for each server is held in dna/$SERVER.json
+3. Edit your cookbook and DNA.
+   The DNA for each server is held in dna/$SERVER.json
 
 4. Update:
    $ rake update SERVER=$SERVER
