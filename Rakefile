@@ -13,5 +13,5 @@ task :bootstrap => [:sync, :host] do |t|
 end
 
 task :update => [:sync, :host] do |t|
-  sh "ssh #{ENV['SERVER']} 'chef-solo -j /etc/chef/dna.json'"
+  sh "ssh #{ENV['SERVER']} 'chef-solo -j /etc/chef/dna/#{ENV['SERVER']}.json'"
 end
