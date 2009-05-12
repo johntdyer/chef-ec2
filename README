@@ -1,0 +1,13 @@
+Chef solo starter pack
+
+1. Start an EC2 instance running Ubuntu (I used Jaunty 9.04 Server from http://alestic.com/)
+
+2. Bootstrap chef:
+   $ rake bootstrap SERVER=ec2-XX-XX-XX-X.compute-X.amazonaws.com
+
+3. Edit your cookbook.
+
+4. Update:
+   $ rake update SERVER=ec2-XX-XX-XX-X.compute-X.amazonaws.com
+
+5. GOTO 3
