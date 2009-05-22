@@ -1,5 +1,9 @@
 Chef solo starter pack
 
+Before you start, make sure that you've fetched the cookbooks submodule:
+$ git submodule init
+$ git submodule update
+
 In the instructions below replace $SERVER with the hostname of the instance,
 which will be something like 'ec2-174-129-96-38.compute-1.amazonaws.com'.
 
