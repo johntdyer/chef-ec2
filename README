@@ -8,12 +8,9 @@ In the instructions below replace $SERVER with the hostname of the instance,
 which will be something like 'ec2-174-129-96-38.compute-1.amazonaws.com'.
 
 1. Start an EC2 instance running Ubuntu (I used Jaunty 9.04 Server from http://alestic.com/)
-   You'll need to edit .ssh/config on your local machine with the correct user
-   and key for the server, e.g.:
+   You'll need to add the appropriate key to your ssh-agent:
 
-   Host $SERVER
-     IdentityFile /home/your_name/.ssh/your_private_key
-     User root
+   ssh-add /home/your_name/.ssh/you_private_key
 
 2. Bootstrap chef:
    $ rake bootstrap SERVER=$SERVER
