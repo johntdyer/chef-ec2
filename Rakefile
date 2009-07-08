@@ -1,7 +1,9 @@
 SSH_OPTIONS={ 'BatchMode' => 'yes', 
   'CheckHostIP' => 'no', 
+  'ForwardAgent' => 'yes',
   'StrictHostKeyChecking' => 'no',
   'UserKnownHostsFile' => '/dev/null' }.map{|k, v| "-o #{k}=#{v}"}.join(' ')
+LOGIN = ENV['LOGIN'] || 'root'
 
 task :host do |t|
   unless ENV['SERVER']
@@ -13,10 +15,21 @@ task :sync => :host do |t|
   sh "rsync -Cavz --delete --rsh='ssh -l root #{SSH_OPTIONS}' #{File.dirname(__FILE__)}/ #{ENV['SERVER']}:/etc/chef"
 end
 
+desc "Bootstrap a new node to have the appropriate bits to run Chef"
 task :bootstrap => [:sync, :host] do |t|
-  sh "ssh #{SSH_OPTIONS} -l root #{ENV['SERVER']} '/etc/chef/bootstrap.sh'"
+  ssh "/etc/chef/bootstrap.sh"
 end
 
+desc "Update an existing node to run the latest Chef configuration"
 task :update => [:sync, :host] do |t|
-  sh "ssh #{SSH_OPTIONS} -l root #{ENV['SERVER']} 'chef-solo -j /etc/chef/dna/#{ENV['SERVER']}.json'"
+  ssh "chef-solo -j /etc/chef/dna/#{ENV['SERVER']}.json"
+end
+
+desc "SSH to the machine as root"
+task :ssh => [:host] do |t|
+  ssh
+end
+
+def ssh(cmd=nil)
+  sh "ssh #{SSH_OPTIONS} -l #{LOGIN} #{ENV['SERVER']} #{cmd.nil? ? "" : "'#{cmd}'"}"
 end
