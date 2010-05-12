@@ -12,7 +12,7 @@ task :host do |t|
 end
 
 task :sync => :host do |t|
-  sh "rsync -Cavz --delete --rsh='ssh -l root #{SSH_OPTIONS}' #{File.dirname(__FILE__)}/ #{ENV['SERVER']}:/etc/chef"
+  sh "rsync -Cavz --delete --exclude .git --rsh='ssh -l root #{SSH_OPTIONS}' #{File.dirname(__FILE__)}/ #{ENV['SERVER']}:/etc/chef"
 end
 
 desc "Bootstrap a new node to have the appropriate bits to run Chef"
